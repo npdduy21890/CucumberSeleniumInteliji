@@ -1,6 +1,6 @@
 Feature: Login Homepage
 
-  Scenario : Login successfully with right account and password
+  Scenario Outline: Login successfully with right account and password
     Given Open browser and navigate to BC-Ribbon
     When Input account and password
     Examples:

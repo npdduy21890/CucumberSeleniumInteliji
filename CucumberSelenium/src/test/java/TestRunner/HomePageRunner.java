@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "C://Users//Admin//IdeaProjects//CucumberSelenium//Features//login.feature",
+        features = {"src/Features/login.feature"},
+        glue = {"StepDefen"}
 
-        glue = "LoginStep")
+)
 public class HomePageRunner {
 
 }
