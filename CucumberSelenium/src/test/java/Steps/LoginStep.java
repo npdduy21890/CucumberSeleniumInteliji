@@ -37,5 +37,6 @@ public class LoginStep {
     public void result () {
         System.out.println("This step open Homepage");
         driver.get("");
+        driver.close();
     }
 }
