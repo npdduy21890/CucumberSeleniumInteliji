@@ -1,6 +1,5 @@
 package Steps;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,16 +14,24 @@ public class LoginStep {
     public void open_browser_navigate_to_homepage (){
         System.setProperty("webdriver.chrome.driver","C:/Users/Admin/Downloads/Selenium_Cucumber_JarFile/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("http://52.24.54.200/ecard-webapp/login");
         System.out.println("This step open browser");
     }
-    @And("I input valid account and password")
+    @Given("I input valid account and password")
     public void input_valid_data () {
         WebElement account = driver.findElement(By.name("j_username"));
         account.sendKeys("qa.qccheck+20181227@gmail.com");
         WebElement password = driver.findElement(By.name("j_password"));
         password.sendKeys("testtest1234");
         System.out.println("This step input account and password");
+    }
+    @Given("I input User Name as <account> and Password as <password>")
+    public void input_invalid_data (){
+        WebElement account = driver.findElement(By.name("j_username"));
+        account.sendKeys();
+        WebElement password = driver.findElement(By.name("j_password"));
+        password.sendKeys();
     }
     @When("I click Login button")
     public void click_button () {
@@ -36,6 +43,26 @@ public class LoginStep {
     public void result () {
         System.out.println("This step open Homepage");
         driver.get("http://52.24.54.200/ecard-webapp/manager/home");
+        driver.close();
+    }
+
+    @Then("Site show content as <result>")
+    public void result_failed () {
+        System.out.println("This step dont open Homepage");
+        driver.get("http://52.24.54.200/ecard-webapp/login?error=true");
+        WebElement message = driver.findElement(By.className("alert alert-danger alert-dismissable"));
+        message.getText();
+        try {
+            if (message.equals()) {
+                System.out.println("The content is right");
+            }
+            else {
+                System.out.println("The content is wrong");
+            }
+        } catch (Exception ex){
+            return;
+        }
+
         driver.close();
     }
 }
