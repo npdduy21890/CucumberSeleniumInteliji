@@ -6,7 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"Features"} ,
+        features = {"Features/LoginFailed.feature" +
+                "Features/Login.feature"} ,
         glue = {"Steps"}
 
 )

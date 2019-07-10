@@ -3,6 +3,7 @@ package Steps;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,11 +33,11 @@ public class LoginStep {
     }
 
     @Given("I input User Name as \"([^\"]*)\" and Password as \"([^\"]*)\"")
-    public void input_invalid_data (){
-        WebElement account = driver.findElement(By.name("j_username"));
-        account.sendKeys();
-        WebElement password = driver.findElement(By.name("j_password"));
-        password.sendKeys();
+    public void input_invalid_data (String account , String password){
+        WebElement account_test = driver.findElement(By.name("j_username"));
+        account_test.sendKeys(account);
+        WebElement password_test = driver.findElement(By.name("j_password"));
+        password_test.sendKeys(password);
     }
 
     @When("I click Login button")
@@ -54,11 +55,12 @@ public class LoginStep {
     }
 
     @Then("Site show content as \"([^\"]*)\"")
-    public void result_failed () {
+    public void result_failed (String content) {
         System.out.println("This step dont open Homepage");
         driver.get("http://52.24.54.200/ecard-webapp/login?error=true");
         WebElement message = driver.findElement(By.className("alert alert-danger alert-dismissable"));
-        message.getText();
+        String msg = message.getText();
+        Assert.assertEquals(content,msg);
         driver.close();
     }
 }
